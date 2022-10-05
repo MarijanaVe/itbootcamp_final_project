@@ -12,7 +12,7 @@ public class LoginPage extends BasePage{
     String loginPageUrl = "https://vue-demo.daniel-avellaneda.com/login";
 
     private By loginButton = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/span/form/div/div[3]/button/span");
-    private By errorMessageBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li/text()");
+    private By errorMessageBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]");
 
 
 

@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +11,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+
+import java.time.Duration;
 
 public class BaseTests {
 
@@ -64,13 +67,58 @@ public class BaseTests {
 
     }
 
-    @Test (dependsOnMethods = "login")
-    public void displaysErrors (String errorMessageButton) {
-        loginPage.login("admin1@admin.com","12345" );
-        String expectedResult = "User does not exists";
-        String actualResult= loginPage.getErrorMessageBtn().getText();
-        Assert.assertEquals(actualResult, expectedResult);
+    @Test
+    public void userDoesNotExist () throws InterruptedException {
+        driver.get("https://vue-demo.daniel-avellaneda.com/login");
+        String expectedResultMsg = "User does not exists\n" +
+                "CLOSE";
+        String expectedResultUrl = "https://vue-demo.daniel-avellaneda.com/login";
+
+        String email = "admin1@admin.com";
+        //String email1 = faker.name().firstName() + "@admin.com";
+        Thread.sleep(1000);
+        String password = "12345";
+        Thread.sleep(1000);
+
+        loginPage.login(email,password);
+        Thread.sleep(1000);
+
+        Assert.assertTrue(loginPage.getErrorMessageBtn(). getText().contains("User does not exists"));
+        Assert.assertTrue(loginPage.getErrorMessageBtn().isDisplayed());
+
+        String actualResultUrl = loginPage.getLoginPageUrl();
+
+        Assert.assertEquals(loginPage.getErrorMessageBtn().getText(), expectedResultMsg);
+        Assert.assertEquals(loginPage.getLoginPageUrl(), expectedResultUrl);
     }
+
+    @Test
+    public void wrongPassword () throws InterruptedException {
+        driver.get("https://vue-demo.daniel-avellaneda.com/login");
+        String expectedResultMsg = "Wrong password\n" +
+                "CLOSE";
+        String expectedResultUrl = "https://vue-demo.daniel-avellaneda.com/login";
+
+        String email = "admin@admin.com ";
+
+        Thread.sleep(1000);
+        String password = "45678";
+        Thread.sleep(1000);
+
+        loginPage.login(email,password);
+        Thread.sleep(1000);
+
+        Assert.assertTrue(loginPage.getErrorMessageBtn(). getText().contains("Wrong password"));
+        Assert.assertTrue(loginPage.getErrorMessageBtn().isDisplayed());
+
+        String actualResultUrl = loginPage.getLoginPageUrl();
+
+        Assert.assertEquals(loginPage.getErrorMessageBtn().getText(), expectedResultMsg);
+        Assert.assertEquals(loginPage.getLoginPageUrl(), expectedResultUrl);
+    }
+
+
+
 
 
     @AfterClass
