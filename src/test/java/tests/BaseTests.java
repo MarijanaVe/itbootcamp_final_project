@@ -32,6 +32,7 @@ public class BaseTests {
         driver = new ChromeDriver();
         driver.get("https://vue-demo.daniel-avellaneda.com/ ");
         loginPage =new LoginPage(driver, driverWait);
+        signupPage =new SignupPage(driver, driverWait);
 
     }
 
@@ -149,11 +150,39 @@ public class BaseTests {
 
     @Test
     public void visitTheSignupPage () throws InterruptedException {
-        driver.get("https://vue-demo.daniel-avellaneda.com/signup ");
+        driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         String expResult = driver.getCurrentUrl();
         Assert.assertTrue(expResult.contains("signup"));
+    }
+
+    @Test
+    public void signupChecksInputTypes () throws InterruptedException {
+        driver.get("https://vue-demo.daniel-avellaneda.com/signup");
+        signupPage.getSignUp().click();
+        String expectedResult = "email";
+        String actualResult = signupPage.getEmailSP().getAttribute("Type");
+        Assert.assertEquals(actualResult, expectedResult);
+        String expectedResult2 = "password";
+        String actualResult2 = signupPage.getPasswordSP().getAttribute("Type");
+        Assert.assertEquals(actualResult2, expectedResult2);
+        String expectedResult3 = "password";
+        String actualResult3 = signupPage.getConfirmPassword().getAttribute("Type");
+        Assert.assertEquals(actualResult3, expectedResult3);
 
     }
+
+    @Test
+    public void signUpUserAlreadyExists () {
+        driver.get("https://vue-demo.daniel-avellaneda.com/signup");
+        signupPage.getSignUp().click();
+        signupPage.loginSignup("Test Test", "admin@admin.com","123654", "123654");
+
+    }
+
+
+
+
+
 
     @AfterClass
     public void AfterClass () {
