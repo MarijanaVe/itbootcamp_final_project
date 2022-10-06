@@ -172,12 +172,44 @@ public class BaseTests {
     }
 
     @Test
-    public void signUpUserAlreadyExists () {
+    public void signUpUserAlreadyExists () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
         signupPage.loginSignup("Test Test", "admin@admin.com","123654", "123654");
+        Thread.sleep(1000);
+
+        String expectedResult = "E-mail already exists";
+        Thread.sleep(1000);
+
+        Assert.assertTrue(signupPage.getErrorEmailAlreadyExists(). getText().contains("E-mail already exists"));
+        Thread.sleep(1000);
+
+        Assert.assertTrue(signupPage.getErrorEmailAlreadyExists().isDisplayed());
+
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));
 
     }
+
+    @Test
+    public void signupITBootcampUser () throws InterruptedException {
+        driver.get("https://vue-demo.daniel-avellaneda.com/signup");
+
+        signupPage.getSignUp().click();
+        signupPage.loginSignup("mx mj", "mx.mj@itbootcamp.rs","123456", "123456");
+        Thread.sleep(1000);
+
+        //driver.switchTo().alert().getText();
+
+
+        //Assert.assertTrue(driver.getPageSource().matches("IMPORTANT: Verify your account"));
+        //Thread.sleep(1000);
+
+
+
+
+    }
+
+
 
 
 
