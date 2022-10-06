@@ -11,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.AdminCitiesPage;
 import pages.LoginPage;
 import pages.SignupPage;
 
@@ -20,6 +21,7 @@ public class BaseTests {
 
     private LoginPage loginPage;
     private SignupPage signupPage;
+    private AdminCitiesPage adminCitiesPage;
 
 
     private WebDriver driver;
@@ -42,7 +44,7 @@ public class BaseTests {
         driver.get("https://vue-demo.daniel-avellaneda.com/login");
     }
 
-    @Test
+    @Test (priority = 1)
     public void login () {
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
         String actualResult = loginPage.getLoginPageUrl();
@@ -50,7 +52,7 @@ public class BaseTests {
         System.out.println("Current URL is: " + loginPage.getLoginPageUrl());
     }
 
-    @Test
+    @Test (priority = 2)
     public void checkInputTypes () {
         loginPage.getloginButton().click();
         loginPage.getEmail().isDisplayed();
@@ -65,7 +67,7 @@ public class BaseTests {
 
     }
 
-    @Test (dependsOnMethods = "login")
+    @Test (priority = 3)
     public void loginWithValidCredentials () {
         loginPage.login("admin@admin.com","12345" );
         String expectedResult = "Login - My Awesome App";
@@ -73,7 +75,7 @@ public class BaseTests {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
-    @Test
+    @Test (priority = 4)
     public void userDoesNotExist () throws InterruptedException {
         Faker faker = new Faker();
 
@@ -99,7 +101,7 @@ public class BaseTests {
         Assert.assertEquals(loginPage.getLoginPageUrl(), expectedResultUrl);
     }
 
-    @Test
+    @Test (priority = 5)
     public void wrongPassword () throws InterruptedException {
 
         String expectedResultMsg = "Wrong password\n" +
@@ -124,7 +126,7 @@ public class BaseTests {
         Assert.assertEquals(loginPage.getLoginPageUrl(), expectedResultUrl);
     }
 
-    @Test
+    @Test (priority = 6)
     public void logout () throws InterruptedException {
 
         String expectedResultUrl = "https://vue-demo.daniel-avellaneda.com/login";
@@ -148,14 +150,14 @@ public class BaseTests {
 
 
 
-    @Test
+    @Test (priority = 7)
     public void visitTheSignupPage () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         String expResult = driver.getCurrentUrl();
         Assert.assertTrue(expResult.contains("signup"));
     }
 
-    @Test
+    @Test (priority = 8)
     public void signupChecksInputTypes () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
@@ -171,7 +173,7 @@ public class BaseTests {
 
     }
 
-    @Test
+    @Test (priority = 9)
     public void signUpUserAlreadyExists () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
@@ -190,19 +192,33 @@ public class BaseTests {
 
     }
 
-    @Test
-    public void signupITBootcampUser () throws InterruptedException {
+    @Test (priority = 10)
+    public void signupFakerUser () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
 
-        signupPage.getSignUp().click();
-        signupPage.loginSignup("mx mj", "mx.mj@itbootcamp.rs","123456", "123456");
+
+        Faker faker =new Faker();
+        String name =faker.internet().domainName();
+        String email =faker.internet().emailAddress();
+        signupPage.loginSignup(name,email, "123456", "123456" );
+        Thread.sleep(2000);
+
+        WebElement actResult=driver.findElement(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"));
+        Thread.sleep(2000);
+        String expResult = "IMPORTANT: Verify your account";
+        Assert.assertEquals(actResult.getText(), expResult);
+
+    }
+
+    @Test (priority = 11)
+    public void adminCitiesPageAndListCities () throws InterruptedException {
+        /*driver.get("https://vue-demo.daniel-avellaneda.com/login");
+        adminCitiesPage.getSignUp().click();
+
+        adminCitiesPage.loginACP("admin@admin.com", "12345");
         Thread.sleep(1000);
 
-        //driver.switchTo().alert().getText();
-
-
-        //Assert.assertTrue(driver.getPageSource().matches("IMPORTANT: Verify your account"));
-        //Thread.sleep(1000);
+         */
 
 
 

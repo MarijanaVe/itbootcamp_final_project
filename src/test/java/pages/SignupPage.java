@@ -16,7 +16,7 @@ public class SignupPage extends BasePage {
 
     private By errorEmailAlreadyExists = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li");
 
-    private By verifyAccMessage = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]/text()");
+    private By verifyAccMessage = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]");
 
     public SignupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
