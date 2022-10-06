@@ -9,14 +9,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.SignupPage;
 
 import java.time.Duration;
 
 public class BaseTests {
 
     private LoginPage loginPage;
+    private SignupPage signupPage;
 
 
     private WebDriver driver;
@@ -32,10 +35,14 @@ public class BaseTests {
 
     }
 
+    @BeforeMethod
+    public void beforeMethod() {
+        driver.manage().deleteAllCookies();
+        driver.get("https://vue-demo.daniel-avellaneda.com/login");
+    }
+
     @Test
     public void login () {
-
-        driver.get("https://vue-demo.daniel-avellaneda.com/login");
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/login";
         String actualResult = loginPage.getLoginPageUrl();
         Assert.assertEquals(actualResult, expectedResult);
@@ -44,7 +51,6 @@ public class BaseTests {
 
     @Test
     public void checkInputTypes () {
-        driver.get("https://vue-demo.daniel-avellaneda.com/login");
         loginPage.getloginButton().click();
         loginPage.getEmail().isDisplayed();
 
@@ -59,22 +65,22 @@ public class BaseTests {
     }
 
     @Test (dependsOnMethods = "login")
-    public void LoginWithValidCredentials () {
+    public void loginWithValidCredentials () {
         loginPage.login("admin@admin.com","12345" );
         String expectedResult = "Login - My Awesome App";
         String actualResult= loginPage.getDriver().getTitle();
         Assert.assertEquals(actualResult, expectedResult);
-
     }
 
     @Test
     public void userDoesNotExist () throws InterruptedException {
-        driver.get("https://vue-demo.daniel-avellaneda.com/login");
+        Faker faker = new Faker();
+
         String expectedResultMsg = "User does not exists\n" +
                 "CLOSE";
         String expectedResultUrl = "https://vue-demo.daniel-avellaneda.com/login";
 
-        String email = "admin1@admin.com";
+        String email = faker.internet().emailAddress();
         //String email1 = faker.name().firstName() + "@admin.com";
         Thread.sleep(1000);
         String password = "12345";
@@ -94,7 +100,7 @@ public class BaseTests {
 
     @Test
     public void wrongPassword () throws InterruptedException {
-        driver.get("https://vue-demo.daniel-avellaneda.com/login");
+
         String expectedResultMsg = "Wrong password\n" +
                 "CLOSE";
         String expectedResultUrl = "https://vue-demo.daniel-avellaneda.com/login";
@@ -117,9 +123,37 @@ public class BaseTests {
         Assert.assertEquals(loginPage.getLoginPageUrl(), expectedResultUrl);
     }
 
+    @Test
+    public void logout () throws InterruptedException {
+
+        String expectedResultUrl = "https://vue-demo.daniel-avellaneda.com/login";
+        String actualResultUrl = loginPage.getLoginPageUrl();
+        Assert.assertEquals(actualResultUrl, expectedResultUrl);
+
+        loginPage.getloginButton().click();
+        Thread.sleep(1000);
+        loginPage.login("admin@admin.com", "12345");
+        Thread.sleep(1000);
+        loginPage.getLogoutBtn().isDisplayed();
+        Thread.sleep(1000);
+        Assert.assertTrue(loginPage.getLogoutBtn().isDisplayed());
+        String url = "https://vue-demo.daniel-avellaneda.com/login";
+        Assert.assertTrue(url.contains("login"));
+        loginPage.getLogoutBtn().click();
+        driver.get("https://vue-demo.daniel-avellaneda.com/home");
+        Assert.assertTrue(actualResultUrl.contains("login"));
+
+    }
 
 
 
+    @Test
+    public void visitTheSignupPage () throws InterruptedException {
+        driver.get("https://vue-demo.daniel-avellaneda.com/signup ");
+        String expResult = driver.getCurrentUrl();
+        Assert.assertTrue(expResult.contains("signup"));
+
+    }
 
     @AfterClass
     public void AfterClass () {

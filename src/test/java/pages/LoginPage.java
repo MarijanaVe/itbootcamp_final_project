@@ -13,6 +13,7 @@ public class LoginPage extends BasePage{
 
     private By loginButton = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/span/form/div/div[3]/button/span");
     private By errorMessageBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]");
+    private By logoutBtn = By.xpath("/html/body/div/div/div/header/div/div[3]/button[2]");
 
 
 
@@ -38,6 +39,10 @@ public class LoginPage extends BasePage{
 
     public WebElement getErrorMessageBtn () {
         return getDriver().findElement(errorMessageBtn);
+    }
+
+    public WebElement getLogoutBtn () {
+        return getDriver().findElement(logoutBtn);
     }
 
     public void login(String email, String password) {
