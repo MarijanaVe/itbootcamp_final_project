@@ -1,0 +1,40 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class SignupPage extends BasePage {
+    private By name = By.id("name");
+    private By emailSP = By.id("email");
+    private By passwordSP = By.id("password");
+    private By confirmPassword = By.id("confirmPassword");
+    private By signMeUpBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button");
+
+    public SignupPage(WebDriver driver, WebDriverWait driverWait) {
+        super(driver, driverWait);
+    }
+
+    public WebElement getName() {
+        return getDriver().findElement(name);
+    }
+
+    public WebElement getEmailSP() {
+        return getDriver().findElement(emailSP);
+    }
+
+    public WebElement getPasswordSP() {
+        return getDriver().findElement(passwordSP);
+    }
+
+    public WebElement getConfirmPassword() {
+        return getDriver().findElement(confirmPassword);
+    }
+
+    public WebElement getSignMeUpBtn() {
+        return getDriver().findElement(signMeUpBtn);
+    }
+
+
+}
