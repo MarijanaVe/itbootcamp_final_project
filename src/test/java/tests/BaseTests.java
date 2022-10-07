@@ -20,14 +20,12 @@ import java.time.Duration;
 
 public class BaseTests {
 
-    private LoginPage loginPage;
-    private SignupPage signupPage;
-    private AdminCitiesPage adminCitiesPage;
-    private HomePage homePage;
-
-
-    private WebDriver driver;
-    private WebDriverWait driverWait;
+    protected LoginPage loginPage;
+    protected SignupPage signupPage;
+    protected AdminCitiesPage adminCitiesPage;
+    protected HomePage homePage;
+    protected WebDriver driver;
+    protected WebDriverWait driverWait;
     private Faker faker;
 
     @BeforeClass
@@ -47,6 +45,9 @@ public class BaseTests {
         driver.manage().deleteAllCookies();
         driver.get("https://vue-demo.daniel-avellaneda.com/login");
     }
+
+    /*
+
 
     @Test (priority = 1)
     public void login () {
@@ -233,15 +234,15 @@ public class BaseTests {
 
     @Test (priority =12)
     public void createCity () throws InterruptedException {
-
+        Faker faker =new Faker();
         loginPage.login("admin@admin.com", "12345");
         Thread.sleep(2000);
         homePage.citiesPage();
         Thread.sleep(2000);
-        String addCity = "Ruma";
+
+        String addCity = faker.country().capital();
         Thread.sleep(5000);
         adminCitiesPage.AddNewCity(addCity);
-
 
         String expectedResult = "Saved successfully";
         Thread.sleep(5000);
@@ -249,6 +250,8 @@ public class BaseTests {
         Thread.sleep(5000);
         Assert.assertTrue(actualResult.contains(expectedResult));     //Poruka sadrzi tekst Saved successfully
     }
+
+     */
 
 
 
