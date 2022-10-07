@@ -7,6 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class LocaleTests extends BaseTests{
 
 
@@ -14,7 +16,6 @@ public class LocaleTests extends BaseTests{
     @Test
     public void esLanguage () throws InterruptedException {
         localePage.getLanguageButton().click();
-        Thread.sleep(5000);
         localePage.getLanguageES().isDisplayed();
         Thread.sleep(5000);
         localePage.getLanguageES().click();
@@ -32,7 +33,6 @@ public class LocaleTests extends BaseTests{
         public void enLanguage() throws InterruptedException {
 
             localePage.getLanguageButton().click();
-            Thread.sleep(5000);
             localePage.getLanguageEN().isDisplayed();
             Thread.sleep(5000);
             localePage.getLanguageEN().click();
@@ -49,7 +49,6 @@ public class LocaleTests extends BaseTests{
         @Test
         public void frLanguage () throws InterruptedException {
         localePage.getLanguageButton().click();
-        Thread.sleep(5000);
         localePage.getLanguageFR().isDisplayed();
         Thread.sleep(5000);
         localePage.getLanguageFR().click();

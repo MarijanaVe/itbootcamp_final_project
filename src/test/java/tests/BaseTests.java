@@ -7,10 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.*;
 
 import java.time.Duration;
@@ -22,6 +19,7 @@ public class BaseTests {
     protected AdminCitiesPage adminCitiesPage;
     protected HomePage homePage;
     protected LocalePage localePage;
+    protected ProfilePage profilePage;
     protected WebDriver driver;
     protected WebDriverWait driverWait;
     private Faker faker;
@@ -36,6 +34,7 @@ public class BaseTests {
         homePage =new HomePage(driver, driverWait);
         adminCitiesPage =new AdminCitiesPage(driver,driverWait);
         localePage =new LocalePage(driver, driverWait);
+        profilePage =new ProfilePage(driver, driverWait);
 
     }
 
@@ -44,6 +43,8 @@ public class BaseTests {
         driver.manage().deleteAllCookies();
         driver.get("https://vue-demo.daniel-avellaneda.com/login");
     }
+
+
 
     /*
 

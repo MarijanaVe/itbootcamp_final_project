@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class LoginTests extends BaseTests{
 
     @Test(priority = 1)
@@ -48,12 +50,12 @@ public class LoginTests extends BaseTests{
 
         String email = faker.internet().emailAddress();
         //String email1 = faker.name().firstName() + "@admin.com";
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         String password = "12345";
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         loginPage.login(email,password);
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         Assert.assertTrue(loginPage.getErrorMessageBtn(). getText().contains("User does not exists"));
         Assert.assertTrue(loginPage.getErrorMessageBtn().isDisplayed());
@@ -73,12 +75,12 @@ public class LoginTests extends BaseTests{
 
         String email = "admin@admin.com ";
 
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         String password = "45678";
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         loginPage.login(email,password);
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         Assert.assertTrue(loginPage.getErrorMessageBtn(). getText().contains("Wrong password"));     //Verifikovati da greska sadrzi poruku Wrong password
         Assert.assertTrue(loginPage.getErrorMessageBtn().isDisplayed());
@@ -97,11 +99,11 @@ public class LoginTests extends BaseTests{
         Assert.assertEquals(actualResultUrl, expectedResultUrl);
 
         loginPage.getloginButton().click();
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         loginPage.login("admin@admin.com", "12345");
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         loginPage.getLogoutBtn().isDisplayed();
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         Assert.assertTrue(loginPage.getLogoutBtn().isDisplayed());     //Verifikovati da je dugme logout vidljivo na stranici
         String url = "https://vue-demo.daniel-avellaneda.com/login";
         Assert.assertTrue(url.contains("login"));     //Verifikovati da se u url-u stranice javlja /login ruta

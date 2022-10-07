@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class SignupTests extends BaseTests{
 
     @Test(priority = 1)
@@ -36,13 +38,13 @@ public class SignupTests extends BaseTests{
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
         signupPage.loginSignup("Test Test", "admin@admin.com","123654", "123654");
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         String expectedResult = "E-mail already exists";     //Verifikovati da greska sadrzi poruku E-mail already exists
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         Assert.assertTrue(signupPage.getErrorEmailAlreadyExists(). getText().contains("E-mail already exists"));
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
         Assert.assertTrue(signupPage.getErrorEmailAlreadyExists().isDisplayed());
 
