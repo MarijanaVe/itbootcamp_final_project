@@ -11,10 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AdminCitiesPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.SignupPage;
+import pages.*;
 
 import java.time.Duration;
 
@@ -24,6 +21,7 @@ public class BaseTests {
     protected SignupPage signupPage;
     protected AdminCitiesPage adminCitiesPage;
     protected HomePage homePage;
+    protected LocalePage localePage;
     protected WebDriver driver;
     protected WebDriverWait driverWait;
     private Faker faker;
@@ -37,6 +35,7 @@ public class BaseTests {
         signupPage =new SignupPage(driver, driverWait);
         homePage =new HomePage(driver, driverWait);
         adminCitiesPage =new AdminCitiesPage(driver,driverWait);
+        localePage =new LocalePage(driver, driverWait);
 
     }
 

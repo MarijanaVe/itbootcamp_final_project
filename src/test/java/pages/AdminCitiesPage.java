@@ -19,6 +19,8 @@ public class AdminCitiesPage extends BasePage{
     private By newItem =By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[1]/div[1]/div[3]/form/div[1]/button");
     private By inputField = By.id("name");
     private By saveNewCity = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]");
+    private By textBoxName = By.id("name");
+    private By saveNamBtn = By.xpath("//*[@id=\"app\"]/div[7]/div/div/div[3]/button[2]");
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
@@ -69,6 +71,14 @@ public class AdminCitiesPage extends BasePage{
         return getDriver().findElement(saveNewCity);
     }
 
+    public WebElement getTextBoxName() {
+        return getDriver().findElement(textBoxName);
+    }
+
+    public WebElement getSaveNameBtn() {
+        return getDriver().findElement(saveNamBtn);
+    }
+
     public void loginACP(String email, String password) {
         getEmail().sendKeys(email);
         getPassword().sendKeys(password);
@@ -82,6 +92,12 @@ public class AdminCitiesPage extends BasePage{
         getInputField().sendKeys(city);
         Thread.sleep(5000);
         getSaveNewCity().click();
+    }
+
+    public void editCity () {
+        getEdit().click();
+        getTextBoxName().sendKeys(" edit ");
+        getSaveNameBtn().click();
     }
 
 

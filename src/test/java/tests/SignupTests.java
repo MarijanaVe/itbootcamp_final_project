@@ -8,14 +8,14 @@ import org.testng.annotations.Test;
 
 public class SignupTests extends BaseTests{
 
-    @Test(priority = 7)
+    @Test(priority = 1)
     public void visitTheSignupPage () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         String expResult = driver.getCurrentUrl();
         Assert.assertTrue(expResult.contains("signup"));     //Verifikovati da se u url-u stranice javlja /signup ruta
     }
 
-    @Test (priority = 8)
+    @Test (priority = 2)
     public void signupChecksInputTypes () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
@@ -31,7 +31,7 @@ public class SignupTests extends BaseTests{
 
     }
 
-    @Test (priority = 9)
+    @Test (priority = 3)
     public void signUpUserAlreadyExists () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
@@ -50,7 +50,7 @@ public class SignupTests extends BaseTests{
 
     }
 
-    @Test (priority = 10)
+    @Test (priority = 4)
     public void signupFakerUser () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
 
