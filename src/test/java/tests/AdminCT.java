@@ -3,16 +3,13 @@ package tests;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AdminCitiesPage;
 
-public class AdminCT extends BaseTests{
-
+public class AdminCT extends BaseTests {
 
 
     @Test
-    public void adminCitiesPageAndListCities () throws InterruptedException {
+    public void adminCitiesPageAndListCities() throws InterruptedException {
 
         loginPage.login("admin@admin.com", "12345");
         Thread.sleep(2000);
@@ -27,13 +24,12 @@ public class AdminCT extends BaseTests{
         Assert.assertTrue(true, String.valueOf(actualRes));     //Verifikovati postojanje logut dugmeta
 
 
-
     }
 
     @Test
-    public void createCity () throws InterruptedException {
+    public void createCity() throws InterruptedException {
 
-        Faker faker =new Faker();
+        Faker faker = new Faker();
 
         loginPage.login("admin@admin.com", "12345");
         Thread.sleep(2000);
@@ -52,9 +48,9 @@ public class AdminCT extends BaseTests{
     }
 
     @Test
-    public void editCity () throws InterruptedException {
+    public void editCity() throws InterruptedException {
 
-        Faker faker =new Faker();
+        Faker faker = new Faker();
         loginPage.login("admin@admin.com", "12345");
         Thread.sleep(2000);
         homePage.citiesPage();
@@ -74,10 +70,10 @@ public class AdminCT extends BaseTests{
         Thread.sleep(5000);
         Assert.assertTrue(actualResult.contains(expectedResult));
 
-  }
+    }
 
     @Test
-    public void searchCity () {
+    public void searchCity() {
 
     }
 }
