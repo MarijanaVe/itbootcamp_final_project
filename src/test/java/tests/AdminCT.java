@@ -2,13 +2,14 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AdminCT extends BaseTests {
 
 
-    @Test
+    @Test (priority = 1)
     public void adminCitiesPageAndListCities() throws InterruptedException {
 
         loginPage.login("admin@admin.com", "12345");
@@ -26,11 +27,10 @@ public class AdminCT extends BaseTests {
 
     }
 
-    @Test
+    @Test (priority = 2)
     public void createCity() throws InterruptedException {
 
         Faker faker = new Faker();
-
         loginPage.login("admin@admin.com", "12345");
         Thread.sleep(2000);
         homePage.citiesPage();
@@ -47,7 +47,7 @@ public class AdminCT extends BaseTests {
         Assert.assertTrue(actualResult.contains(expectedResult));     //Poruka sadrzi tekst Saved successfully
     }
 
-    @Test
+    @Test (priority = 3)
     public void editCity() throws InterruptedException {
 
         Faker faker = new Faker();
@@ -71,11 +71,11 @@ public class AdminCT extends BaseTests {
         driver.findElement(By.className("v-snack__content")).getText();
 
         Thread.sleep(5000);
-        Assert.assertTrue(actualResult.contains(expectedResult));
+        Assert.assertTrue(actualResult.contains(expectedResult));     //Verifikovati da poruka sadrzi tekst Saved successfully
 
     }
 
-    @Test
+    @Test (priority = 4)
     public void searchCity() throws InterruptedException {
         Faker faker = new Faker();
         loginPage.login("admin@admin.com", "12345");
@@ -90,7 +90,10 @@ public class AdminCT extends BaseTests {
         adminCitiesPage.getEdit().click();
         adminCitiesPage.getInputField().sendKeys(" edited ");
         adminCitiesPage.getSaveNewCity().click();
-        adminCitiesPage.getNameField().isDisplayed();
+
+        Thread.sleep(5000);
+        adminCitiesPage.getSearchField().sendKeys(adminCitiesPage.getFirstName().getText());
+        System.out.println(adminCitiesPage.getFirstName().getText()); //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
 
 
 

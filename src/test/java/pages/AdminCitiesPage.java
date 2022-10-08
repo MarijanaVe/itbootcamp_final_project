@@ -23,6 +23,8 @@ public class AdminCitiesPage extends BasePage{
     private By saveNamBtn = By.xpath("//*[@id=\"app\"]/div[7]/div/div/div[3]/button[2]");
 
     private By nameField = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
+    private By searchField = By.xpath("//*[@id=\"search\"]");
+    private By firstName = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
@@ -83,6 +85,15 @@ public class AdminCitiesPage extends BasePage{
 
     public WebElement getSaveNameBtn() {
         return getDriver().findElement(saveNamBtn);
+    }
+
+
+    public WebElement getSearchField() {
+        return getDriver().findElement(searchField);
+    }
+
+    public WebElement getFirstName() {
+        return getDriver().findElement(firstName);
     }
 
     public void loginACP(String email, String password) {
