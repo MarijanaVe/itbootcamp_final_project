@@ -15,7 +15,7 @@ public class AdminCT extends BaseTests {
         loginPage.login("admin@admin.com", "12345");
         Thread.sleep(2000);
         homePage.citiesPage();
-        Thread.sleep(2000);
+
 
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/admin/cities";
         String actualResult = driver.getCurrentUrl();
@@ -23,6 +23,9 @@ public class AdminCT extends BaseTests {
 
         boolean actualRes = homePage.getLogoutBtn().isDisplayed();
         Assert.assertTrue(true, String.valueOf(actualRes));     //Verifikovati postojanje logut dugmeta
+
+        Thread.sleep(2000);
+        loginPage.getLogoutBtn().click();
 
 
     }
@@ -39,9 +42,11 @@ public class AdminCT extends BaseTests {
         String addCity = faker.country().capital();
         Thread.sleep(5000);
         adminCitiesPage.AddNewCity(addCity);
+        Thread.sleep(5000);
+        loginPage.getLogoutBtn().click();
 
         String expectedResult = "Saved successfully";
-        Thread.sleep(5000);
+
         String actualResult = driver.findElement(By.xpath(("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]"))).getText();
         Thread.sleep(5000);
         Assert.assertTrue(actualResult.contains(expectedResult));     //Poruka sadrzi tekst Saved successfully
@@ -72,6 +77,8 @@ public class AdminCT extends BaseTests {
 
         Thread.sleep(5000);
         Assert.assertTrue(actualResult.contains(expectedResult));     //Verifikovati da poruka sadrzi tekst Saved successfully
+        Thread.sleep(5000);
+        loginPage.getLogoutBtn().click();
 
     }
 
@@ -94,9 +101,11 @@ public class AdminCT extends BaseTests {
         Thread.sleep(5000);
         adminCitiesPage.getSearchField().sendKeys(adminCitiesPage.getFirstName().getText());
         System.out.println(adminCitiesPage.getFirstName().getText()); //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
+        Thread.sleep(5000);
+        loginPage.getLogoutBtn().click();
 
     }
-    @Test
+    @Test (priority = 5)
     public void deleteCity () throws InterruptedException {
         Faker faker = new Faker();
         loginPage.login("admin@admin.com", "12345");
