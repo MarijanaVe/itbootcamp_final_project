@@ -15,7 +15,12 @@ public class AdminCitiesPage extends BasePage{
     private By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
     private By cities= By.xpath("*[@id=\"app\"]/div[3]/div[1]/a[1]");
     private By edit =By.id ("edit");
-    private By delete = By.id ("delete");
+    private By delete = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span");
+
+    ////*[@id='app']/div[5]/div/div/div[2]/button[2]
+    ////*[@id="app"]/div[9]/div/div/div[2]/button[2]
+    //*[@id="app"]/div[4]/div/div/div[2]/button[2]
+    ///*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div
     private By newItem =By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[1]/div[1]/div[3]/form/div[1]/button");
     private By inputField = By.id("name");
     private By saveNewCity = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]");
@@ -25,6 +30,10 @@ public class AdminCitiesPage extends BasePage{
     private By nameField = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
     private By searchField = By.xpath("//*[@id=\"search\"]");
     private By firstName = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
+    private By delete1 = By.xpath("//*[@id=\"delete\"]/span/i");
+    private By successfullyDeleted = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div");
+    //By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
+    //By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div")
 
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
@@ -88,6 +97,18 @@ public class AdminCitiesPage extends BasePage{
     }
 
 
+    public WebElement getSuccessfullyDeleted() {
+        return getDriver().findElement(successfullyDeleted);
+    }
+    public WebElement getDelete() {
+        return getDriver().findElement(delete);
+    }
+
+    public WebElement getDelete1() {
+        return getDriver().findElement(delete1);
+    }
+
+
     public WebElement getSearchField() {
         return getDriver().findElement(searchField);
     }
@@ -116,6 +137,14 @@ public class AdminCitiesPage extends BasePage{
         getTextBoxName().sendKeys(" edit ");
         getSaveNameBtn().click();
     }
+
+    public void deleteCity() throws InterruptedException {
+        getDelete1().click();
+        Thread.sleep(5000);
+        getDelete().click();
+
+    }
+
 
 
 

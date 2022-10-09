@@ -95,6 +95,27 @@ public class AdminCT extends BaseTests {
         adminCitiesPage.getSearchField().sendKeys(adminCitiesPage.getFirstName().getText());
         System.out.println(adminCitiesPage.getFirstName().getText()); //Verifikovati da se u Name koloni prvog reda nalazi tekst iz pretrage
 
+    }
+    @Test
+    public void deleteCity () throws InterruptedException {
+        Faker faker = new Faker();
+        loginPage.login("admin@admin.com", "12345");
+        Thread.sleep(2000);
+        homePage.citiesPage();
+        Thread.sleep(2000);
+
+        String addCity = faker.country().capital();
+        Thread.sleep(5000);
+        adminCitiesPage.AddNewCity(addCity);
+        Thread.sleep(5000);
+        adminCitiesPage.getEdit().click();
+        adminCitiesPage.getInputField().sendKeys(" edited ");
+        adminCitiesPage.getSaveNewCity().click();
+        Thread.sleep(15000);
+        adminCitiesPage.deleteCity();
+
+        Thread.sleep(15000);
+        Assert.assertTrue(adminCitiesPage.getSuccessfullyDeleted().getText().contains("Deleted successfully"));
 
 
     }
