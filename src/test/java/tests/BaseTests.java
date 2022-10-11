@@ -1,16 +1,13 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import pages.*;
-
-import java.time.Duration;
 
 public class BaseTests {
 
@@ -25,16 +22,16 @@ public class BaseTests {
     private Faker faker;
 
     @BeforeClass
-    public void setup () {
+    public void setup() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\tilma\\IdeaProjects\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://vue-demo.daniel-avellaneda.com/ ");
-        loginPage =new LoginPage(driver, driverWait);
-        signupPage =new SignupPage(driver, driverWait);
-        homePage =new HomePage(driver, driverWait);
-        adminCitiesPage =new AdminCitiesPage(driver,driverWait);
-        localePage =new LocalePage(driver, driverWait);
-        profilePage =new ProfilePage(driver, driverWait);
+        loginPage = new LoginPage(driver, driverWait);
+        signupPage = new SignupPage(driver, driverWait);
+        homePage = new HomePage(driver, driverWait);
+        adminCitiesPage = new AdminCitiesPage(driver, driverWait);
+        localePage = new LocalePage(driver, driverWait);
+        profilePage = new ProfilePage(driver, driverWait);
     }
 
     @BeforeMethod
@@ -43,13 +40,10 @@ public class BaseTests {
         driver.get("https://vue-demo.daniel-avellaneda.com/login");
     }
 
-
     @AfterClass
-    public void AfterClass () {
+    public void AfterClass() {
         driver.quit();
     }
-
-
 
 
 }

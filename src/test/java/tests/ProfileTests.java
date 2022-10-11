@@ -4,18 +4,17 @@ import com.github.javafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class ProfileTests extends BaseTests{
 
 
     @Test
     public void editProfile() throws InterruptedException {
-
         loginPage.login("admin@admin.com", "12345");
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         profilePage.visitProfilePage();
         Thread.sleep(2000);
-
-
         Faker faker = new Faker();
         String name = faker.name().fullName();
         String phone = String.valueOf(faker.phoneNumber());
@@ -24,24 +23,22 @@ public class ProfileTests extends BaseTests{
         String twitter = "https://" + faker.internet().domainName();
         String gitHub = "https://" + faker.name().firstName() + faker.internet().domainName();
         profilePage.editProfileData(name, phone, city, country, twitter, gitHub);
-        Thread.sleep(10000);
-        String expectedResult = name;     //Polje za unos imena za atribut type ima vrednost ime
+        Thread.sleep(4000);
+        String expectedResult = name;
         String actualResult = profilePage.getNameField().getAttribute("value");
         Assert.assertEquals(actualResult, expectedResult);
-        String expectedResultPhone = phone;     //Polje za unos telefona za atribut type ima vrednost telefon
+        String expectedResultPhone = phone;
         String actualResultPhone = profilePage.getPhone().getAttribute("value");
         Assert.assertEquals(actualResultPhone, expectedResultPhone);
-        String expectedResultCountry = country;     //Polje za unos drzave za atribut type ima vrednost drzava
+        String expectedResultCountry = country;
         String actualResultCountry = profilePage.getCountry().getAttribute("value");
         Assert.assertEquals(actualResultCountry, expectedResultCountry);
-        String expectedResultTwitter = twitter;     //Polje za unos Twitter naloga za atribut type ima vrednost Twitter
+        String expectedResultTwitter = twitter;
         String actualResultTwitter = profilePage.getTwitter().getAttribute("value");
         Assert.assertEquals(actualResultTwitter, expectedResultTwitter);
-        String expectedResultGithub = gitHub;     //Polje za unos GitHub naloga za atribut type ima vrednost GitHub
+        String expectedResultGithub = gitHub;
         String actualResultGithub = profilePage.getGitHub().getAttribute("value");
         Assert.assertEquals(actualResultGithub.toLowerCase(),expectedResultGithub.toLowerCase());
-
-
     }
 
 

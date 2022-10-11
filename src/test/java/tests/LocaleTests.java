@@ -14,53 +14,49 @@ public class LocaleTests extends BaseTests{
 
 
     @Test
-    public void esLanguage () throws InterruptedException {
+    public void esLanguage () {
         localePage.getLanguageButton().click();
         localePage.getLanguageES().isDisplayed();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         localePage.getLanguageES().click();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://vue-demo.daniel-avellaneda.com/");
         localePage.getHeader().isDisplayed();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         String expectedResult = "Página de aterrizaje";
         String actualResult = localePage.getHeader().getText();
         Assert.assertEquals(expectedResult,actualResult);
+    }
 
-        }
-
-        @Test
-        public void enLanguage() throws InterruptedException {
-
-            localePage.getLanguageButton().click();
-            localePage.getLanguageEN().isDisplayed();
-            Thread.sleep(5000);
-            localePage.getLanguageEN().click();
-            Thread.sleep(5000);
-            driver.get("https://vue-demo.daniel-avellaneda.com/");
-            localePage.getHeader().isDisplayed();
-            Thread.sleep(5000);
-            String expectedResult = "Landing";
-            String actualResult = localePage.getHeader().getText();
-            Assert.assertEquals(expectedResult,actualResult);
-
-        }
-
-        @Test
-        public void frLanguage () throws InterruptedException {
+    @Test
+    public void enLanguage() {
         localePage.getLanguageButton().click();
-        localePage.getLanguageFR().isDisplayed();
-        Thread.sleep(5000);
-        localePage.getLanguageFR().click();
-        Thread.sleep(5000);
+        localePage.getLanguageEN().isDisplayed();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        localePage.getLanguageEN().click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://vue-demo.daniel-avellaneda.com/");
         localePage.getHeader().isDisplayed();
-        Thread.sleep(5000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        String expectedResult = "Landing";
+        String actualResult = localePage.getHeader().getText();
+        Assert.assertEquals(expectedResult,actualResult);
+    }
+
+        @Test
+        public void frLanguage () {
+        localePage.getLanguageButton().click();
+        localePage.getLanguageFR().isDisplayed();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        localePage.getLanguageFR().click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.get("https://vue-demo.daniel-avellaneda.com/");
+        localePage.getHeader().isDisplayed();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         String expectedResult = "Page d'atterrissage";
         String actualResult = localePage.getHeader().getText();
         Assert.assertEquals(expectedResult, actualResult);
-
-        }
+    }
 
 
 

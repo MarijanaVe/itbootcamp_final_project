@@ -10,63 +10,54 @@ import java.time.Duration;
 
 public class SignupTests extends BaseTests{
 
-    @Test(priority = 1)
-    public void visitTheSignupPage () throws InterruptedException {
+    @Test (priority = 1)
+    public void visitTheSignupPage () {
+        signupPage.getSignUp().click();
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         String expResult = driver.getCurrentUrl();
-        Assert.assertTrue(expResult.contains("signup"));     //Verifikovati da se u url-u stranice javlja /signup ruta
+        Assert.assertTrue(expResult.contains("signup"));
     }
 
     @Test (priority = 2)
-    public void signupChecksInputTypes () throws InterruptedException {
+    public void signupChecksInputTypes ()  {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
-        String expectedResult = "email";     //Polje za unos emaila za atribut type ima vrednost email
+        String expectedResult = "email";
         String actualResult = signupPage.getEmailSP().getAttribute("Type");
         Assert.assertEquals(actualResult, expectedResult);
-        String expectedResult2 = "password";     //Polje za unos lozinke za atribut type ima vrednost password
+        String expectedResult2 = "password";
         String actualResult2 = signupPage.getPasswordSP().getAttribute("Type");
         Assert.assertEquals(actualResult2, expectedResult2);
-        String expectedResult3 = "password";     //Polje za unos lozinke za potvrdu za atribut type ima vrednost password
+        String expectedResult3 = "password";
         String actualResult3 = signupPage.getConfirmPassword().getAttribute("Type");
         Assert.assertEquals(actualResult3, expectedResult3);
-
     }
 
     @Test (priority = 3)
-    public void signUpUserAlreadyExists () throws InterruptedException {
+    public void signUpUserAlreadyExists ()  {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         signupPage.getSignUp().click();
         signupPage.loginSignup("Test Test", "admin@admin.com","123654", "123654");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-
-        String expectedResult = "E-mail already exists";     //Verifikovati da greska sadrzi poruku E-mail already exists
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-
         Assert.assertTrue(signupPage.getErrorEmailAlreadyExists(). getText().contains("E-mail already exists"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-
         Assert.assertTrue(signupPage.getErrorEmailAlreadyExists().isDisplayed());
-
-        Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));     //Verifikovati da se u url-u stranice javlja /signup ruta
-
+        Assert.assertTrue(driver.getCurrentUrl().endsWith("/signup"));
     }
 
     @Test (priority = 4)
     public void signupFakerUser () throws InterruptedException {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
-
-
         Faker faker =new Faker();
         String name =faker.internet().domainName();
         String email =faker.internet().emailAddress();
         signupPage.loginSignup(name,email, "123456", "123456" );
         Thread.sleep(2000);
-
         WebElement actResult=driver.findElement(By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]"));
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         String expResult = "IMPORTANT: Verify your account";
-        Assert.assertEquals(actResult.getText(), expResult);     //Dijalog za obavestenje sadrzi tekst IMPORTANT: Verify your account
+        Assert.assertEquals(actResult.getText(), expResult);
+
 
     }
 }

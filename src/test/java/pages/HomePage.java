@@ -9,8 +9,6 @@ public class HomePage extends BasePage {
 
     private By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
     private By cities= By.xpath("//*[@id=\"app\"]/div[3]/div[1]/a[1]");
-
-
     private By logoutBtn =By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[2]");
 
     public HomePage(WebDriver driver, WebDriverWait driverWait) {
@@ -33,7 +31,6 @@ public class HomePage extends BasePage {
         getAdmin().click();
         Thread.sleep(6000);
         getCities().click();
-
     }
 
 }

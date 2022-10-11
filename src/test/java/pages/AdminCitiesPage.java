@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class AdminCitiesPage extends BasePage{
 
     private By email = By.id("email");
@@ -15,26 +17,17 @@ public class AdminCitiesPage extends BasePage{
     private By admin = By.xpath("//*[@id=\"app\"]/div[1]/div/header/div/div[3]/button[1]");
     private By cities= By.xpath("*[@id=\"app\"]/div[3]/div[1]/a[1]");
     private By edit =By.id ("edit");
-    private By delete = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span");
-
-    ////*[@id='app']/div[5]/div/div/div[2]/button[2]
-    ////*[@id="app"]/div[9]/div/div/div[2]/button[2]
-    //*[@id="app"]/div[4]/div/div/div[2]/button[2]
-    ///*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div
+    private By delete = By.xpath(".v-dialog .v-card__actions > button:last-child");
     private By newItem =By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[1]/div[1]/div[3]/form/div[1]/button");
     private By inputField = By.id("name");
     private By saveNewCity = By.xpath("//*[@id=\"app\"]/div[5]/div/div/div[3]/button[2]");
     private By textBoxName = By.id("name");
     private By saveNamBtn = By.xpath("//*[@id=\"app\"]/div[7]/div/div/div[3]/button[2]");
-
     private By nameField = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
     private By searchField = By.xpath("//*[@id=\"search\"]");
     private By firstName = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
     private By delete1 = By.xpath("//*[@id=\"delete\"]/span/i");
     private By successfullyDeleted = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div");
-    //By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
-    //By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div")
-
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -96,7 +89,6 @@ public class AdminCitiesPage extends BasePage{
         return getDriver().findElement(saveNamBtn);
     }
 
-
     public WebElement getSuccessfullyDeleted() {
         return getDriver().findElement(successfullyDeleted);
     }
@@ -108,7 +100,6 @@ public class AdminCitiesPage extends BasePage{
         return getDriver().findElement(delete1);
     }
 
-
     public WebElement getSearchField() {
         return getDriver().findElement(searchField);
     }
@@ -117,32 +108,18 @@ public class AdminCitiesPage extends BasePage{
         return getDriver().findElement(firstName);
     }
 
-    public void loginACP(String email, String password) {
-        getEmail().sendKeys(email);
-        getPassword().sendKeys(password);
-        getLoginButton().click();
-    }
-
     public void AddNewCity(String city) throws InterruptedException {
-
         getNewItem().click();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         getInputField().sendKeys(city);
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         getSaveNewCity().click();
-    }
-
-    public void editCity () {
-        getEdit().click();
-        getTextBoxName().sendKeys(" edit ");
-        getSaveNameBtn().click();
     }
 
     public void deleteCity() throws InterruptedException {
         getDelete1().click();
         Thread.sleep(5000);
         getDelete().click();
-
     }
 
 

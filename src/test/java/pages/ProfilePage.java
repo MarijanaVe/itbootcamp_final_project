@@ -57,10 +57,10 @@ public class ProfilePage extends BasePage{
         return getDriver().findElement(saveBtn);
     }
 
-
     public void visitProfilePage(){
         getMyProfileBtn().click();
     }
+
     public void editProfileData (String name, String phone, String city, String country, String twitter, String gitHub){
         getNameField().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
         getNameField().sendKeys(name);
@@ -75,7 +75,7 @@ public class ProfilePage extends BasePage{
         getGitHub().sendKeys(Keys.CONTROL + "A", Keys.DELETE);
         getGitHub().sendKeys(gitHub);
         getSaveBtn().click();
-            //driverWait.withTimeout(Duration.ofSeconds(5));
+
         }
 
 
