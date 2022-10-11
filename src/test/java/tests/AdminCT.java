@@ -40,7 +40,7 @@ public class AdminCT extends BaseTests {
         String addCity = faker.country().capital();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         adminCitiesPage.AddNewCity(addCity);
-        Thread.sleep(5000);
+        Thread.sleep(4000);
         loginPage.getLogoutBtn().click();
 
         String expectedResult = "Saved successfully";
@@ -50,10 +50,11 @@ public class AdminCT extends BaseTests {
         Assert.assertTrue(actualResult.contains(expectedResult));
     }
 
+
     @Test
     public void editCity() throws InterruptedException {
-
         Faker faker = new Faker();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         loginPage.login("admin@admin.com", "12345");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         homePage.citiesPage();
@@ -62,7 +63,7 @@ public class AdminCT extends BaseTests {
         String addCity = faker.country().capital();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         adminCitiesPage.AddNewCity(addCity);
-        Thread.sleep(5000);
+        Thread.sleep(4000);
         adminCitiesPage.getEdit().click();
         adminCitiesPage.getInputField().sendKeys(" edited ");
         adminCitiesPage.getSaveNewCity().click();
@@ -74,14 +75,14 @@ public class AdminCT extends BaseTests {
 
         Thread.sleep(1000);
         Assert.assertTrue(actualResult.contains(expectedResult));
-
         loginPage.getLogoutBtn().click();
+
     }
 
     @Test
     public void searchCity() throws InterruptedException {
         Faker faker = new Faker();
-        Thread.sleep(1000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         loginPage.login("admin@admin.com", "12345");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         homePage.citiesPage();
@@ -90,8 +91,10 @@ public class AdminCT extends BaseTests {
         String addCity = faker.country().capital();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         adminCitiesPage.AddNewCity(addCity);
-        Thread.sleep(5000);
+        Thread.sleep(4000);
         adminCitiesPage.getEdit().click();
+
+
         adminCitiesPage.getInputField().sendKeys(" edited ");
         adminCitiesPage.getSaveNewCity().click();
 
@@ -104,6 +107,7 @@ public class AdminCT extends BaseTests {
     @Test
     public void deleteCity () throws InterruptedException {
         Faker faker = new Faker();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         loginPage.login("admin@admin.com", "12345");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         homePage.citiesPage();
@@ -112,7 +116,7 @@ public class AdminCT extends BaseTests {
         String addCity = faker.country().capital();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         adminCitiesPage.AddNewCity(addCity);
-        Thread.sleep(5000);
+        Thread.sleep(4000);
         adminCitiesPage.getEdit().click();
         adminCitiesPage.getInputField().sendKeys(" edited ");
         adminCitiesPage.getSaveNewCity().click();

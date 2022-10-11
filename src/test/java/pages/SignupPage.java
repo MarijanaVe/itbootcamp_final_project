@@ -13,7 +13,6 @@ public class SignupPage extends BasePage {
     private By signMeUpBtn = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div[5]/button");
     private By signUp= By.xpath("//*[@id=\"app\"]/div/div/header/div/div[3]/a[4]");
     private By errorEmailAlreadyExists = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li");
-    private By verifyAccMessage = By.xpath("//*[@id=\"app\"]/div[4]/div/div/div[1]");
 
     public SignupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -43,13 +42,8 @@ public class SignupPage extends BasePage {
         return getDriver().findElement(signUp);
     }
 
-    public WebElement getErrorEmailAlreadyExists() {
-        return getDriver().findElement(errorEmailAlreadyExists);
+    public WebElement getErrorEmailAlreadyExists() { return getDriver().findElement(errorEmailAlreadyExists);
     }
-
-    public WebElement verifyAccMessage() { return getDriver().findElement(verifyAccMessage);
-    }
-
 
     public void loginSignup(String name, String emailSP,String passwordSP, String confirmPassword) {
         getName().sendKeys(name);
