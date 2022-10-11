@@ -3,6 +3,7 @@ package tests;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,10 +12,10 @@ import java.time.Duration;
 public class AdminCT extends BaseTests {
 
 
-    @Test (priority = 5)
+    @Test
     public void adminCitiesPageAndListCities() throws InterruptedException {
         loginPage.login("admin@admin.com", "12345");
-        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         homePage.citiesPage();
 
         String expectedResult = "https://vue-demo.daniel-avellaneda.com/admin/cities";
@@ -28,7 +29,7 @@ public class AdminCT extends BaseTests {
         loginPage.getLogoutBtn().click();
     }
 
-    @Test (priority = 6)
+    @Test
     public void createCity() throws InterruptedException {
         Faker faker = new Faker();
         loginPage.login("admin@admin.com", "12345");
@@ -49,7 +50,7 @@ public class AdminCT extends BaseTests {
         Assert.assertTrue(actualResult.contains(expectedResult));
     }
 
-    @Test (priority = 7)
+    @Test
     public void editCity() throws InterruptedException {
 
         Faker faker = new Faker();
@@ -71,15 +72,16 @@ public class AdminCT extends BaseTests {
         String actualResult = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")).getText();
         driver.findElement(By.className("v-snack__content")).getText();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Thread.sleep(1000);
         Assert.assertTrue(actualResult.contains(expectedResult));
 
         loginPage.getLogoutBtn().click();
     }
 
-    @Test (priority = 8)
+    @Test
     public void searchCity() throws InterruptedException {
         Faker faker = new Faker();
+        Thread.sleep(1000);
         loginPage.login("admin@admin.com", "12345");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         homePage.citiesPage();
@@ -99,7 +101,7 @@ public class AdminCT extends BaseTests {
         loginPage.getLogoutBtn().click();
     }
 
-    @Test (priority = 9)
+    @Test
     public void deleteCity () throws InterruptedException {
         Faker faker = new Faker();
         loginPage.login("admin@admin.com", "12345");
@@ -114,11 +116,12 @@ public class AdminCT extends BaseTests {
         adminCitiesPage.getEdit().click();
         adminCitiesPage.getInputField().sendKeys(" edited ");
         adminCitiesPage.getSaveNewCity().click();
-        Thread.sleep(5000);
-        adminCitiesPage.deleteCity();
-
-        Thread.sleep(5000);
-        Assert.assertTrue(adminCitiesPage.getSuccessfullyDeleted().getText().contains("Deleted successfully"));
+        adminCitiesPage.getDeleteButton().click();
+        adminCitiesPage.getFinallyDeleteButton().click();
+        String actualResult = adminCitiesPage.getSaveMsg().getText();
+        Thread.sleep(1000);
+        String expectedResult ="Deleted successfully\nCLOSE";
+        Assert.assertTrue(actualResult.contains(expectedResult));
         loginPage.getLogoutBtn().click();
     }
 }

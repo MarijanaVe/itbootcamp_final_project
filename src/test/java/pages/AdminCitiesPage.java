@@ -28,6 +28,10 @@ public class AdminCitiesPage extends BasePage{
     private By firstName = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]");
     private By delete1 = By.xpath("//*[@id=\"delete\"]/span/i");
     private By successfullyDeleted = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div");
+    private By deleteButton = By.xpath("//*[@id=\"delete\"]/span");
+    private By finallyDeleteButton = By.xpath("//*[@id=\"app\"]/div[6]/div/div/div[2]/button[2]");
+    private By saveMsg = By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]");
+
 
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -106,6 +110,17 @@ public class AdminCitiesPage extends BasePage{
 
     public WebElement getFirstName() {
         return getDriver().findElement(firstName);
+    }
+    public WebElement getFinallyDeleteButton() {
+        return getDriver().findElement(finallyDeleteButton);
+    }
+
+    public WebElement getDeleteButton() {
+        return getDriver().findElement(deleteButton);
+    }
+
+    public WebElement getSaveMsg() {
+        return getDriver().findElement(saveMsg);
     }
 
     public void AddNewCity(String city) throws InterruptedException {

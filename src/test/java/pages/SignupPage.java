@@ -47,8 +47,7 @@ public class SignupPage extends BasePage {
         return getDriver().findElement(errorEmailAlreadyExists);
     }
 
-    public WebElement verifyAccMessage() {
-        return getDriver().findElement(verifyAccMessage);
+    public WebElement verifyAccMessage() { return getDriver().findElement(verifyAccMessage);
     }
 
 
